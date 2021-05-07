@@ -69,7 +69,7 @@ function searchBySingle(){           //function is called when form is submitted
     let userInput = document.forms['singleForm']['prop-value'].value;
 
     let filteredPeople = people.filter(function (person) {
-        if(person[userSelection] === userInput){
+        if(person[userSelection] == userInput){
             return true;
         }
         return false;
