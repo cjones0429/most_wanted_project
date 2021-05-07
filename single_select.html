@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Most Wanted &middot; Single Selection</title>
+  </head>
+  <body>
+    <div>
+      <ul class="navbar">
+        <li><a href="index.html" class="navbar-list">Search By Name</a></li>
+        <li><a href="single_select.html" class="active navbar-list">Search Single Property</a></li>
+      </ul>
+    </div>
+    <form id="singleForm">
+        <p class="form-prompt">Select a Category</p>
+        <input type="radio" id="selection" name="selection" value="id">
+        <label for="selection">ID Number</label><br>
+        <input type="radio" id="selection" name="selection" value="firstName">
+        <label for="selection">First Name</label><br>
+        <input type="radio" id="selection" name="selection" value="lastName"><br>
+        <label for="selection">Last name</label><br>
+        <input type="radio" id="selection" name="selection" value="gender">
+        <label for="selection">Gender</label><br>
+        <input type="radio" id="selection" name="selection" value="dob">
+        <label for="selection">D.O.B.</label><br>
+        <input type="radio" id="selection" name="selection" value="height"><br>
+        <label for="selection">Height</label><br>
+        <input type="radio" id="selection" name="selection" value="weight">
+        <label for="selection">Weight</label><br>
+        <input type="radio" id="selection" name="selection" value="eyeColor">
+        <label for="selection">Eye Color</label><br>
+        <input type="radio" id="selection" name="selection" value="occupation"><br>
+        <label for="selection">Occupation</label><br>
+        <input type="radio" id="selection" name="selection" value="parents">
+        <label for="selection">Parents</label><br>
+        <input type="radio" id="selection" name="selection" value="currentSpouse">
+        <label for="selection">Current Spouse</label><br><br>
+        <label for="prop-value">Your Entry:</label><br>
+        <input type="text" id="prop-value" name="prop-value" value="Madden"><br><br>
+        <input type="button" id="button" onclick="searchBySingle()" value="Submit">
+    </form> 
+    <table>
+      <thead>
+        <tr>
+          <th>I.D. #</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Gender</th>
+          <th>D.O.B.</th>
+          <th>Height</th>
+          <th>Weight</th>
+          <th>Eye Color</th>
+          <th>Occupation</th>
+          <th>Parents</th>
+          <th>Current Spouse</th>
+        </tr>
+      </thead>
+      <tbody id="data">
+
+      </tbody>
+    </table>
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
