@@ -18,15 +18,17 @@ function searchByName(){
         console.log(filteredPeople);
     }else{
         console.log('Sorry, looks like there is no one with that name.');
+        alert('Sorry, looks like there is no one with that name.');
     }
+    displayTable(filteredPeople);
 }
 
-function searchBySingle(){
+function searchBySingle(){           //function is called when form is submitted. Searches for matches, makes new array, posts results in table.
     var userSelection = document.forms['singleForm']['selection'].value;
     let userInput = document.forms['singleForm']['prop-value'].value;
 
     let filteredPeople = people.filter(function (person) {
-        if(person.userSelection === userInput){
+        if(person[userSelection] === userInput){
             return true;
         }
         return false;
@@ -35,8 +37,10 @@ function searchBySingle(){
     if(filteredPeople.length > 0){
         console.log(filteredPeople);
     }else{
-        console.log('Sorry, looks like there is no one with that name.');
+        console.log('Sorry, no match.');
+        alert('Sorry, no match.');
     }
+    displayTable(filteredPeople);
 }
 
 
@@ -58,4 +62,3 @@ function displayTable(object){
         <td>${el.currentSpouse}</td>`
 })
 }
-displayTable(people);
