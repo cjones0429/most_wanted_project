@@ -17,8 +17,6 @@ function searchByFirstName(peoplelist){
         return filteredPeople;
 
     }else{
-        alert('Sorry, there is no one with that first name.');
-        // return false;
     }
 }
 
@@ -38,8 +36,6 @@ function searchByLastName(peoplelist){
         return filteredPeople;
 
     }else{
-        alert('Sorry, there is no one with that last name.');
-        // return false;
     }
 }
 
@@ -179,7 +175,6 @@ function searchByParents(peoplelist){
         return filteredPeople;
     }
     else{
-        // return false;
     }
 }
 
@@ -199,17 +194,83 @@ function searchByCurrentSpouse(peoplelist){
         return filteredPeople;
     }
     else{
-        // return false;
     }
 }
-       
+
+// beginning of decendant table
+
+function displayDescendantInfo(idNumber){
+    let selectionInfo = people.filter(function (person){
+        if(person.id == idNumber){
+            return true;
+        }
+    })
+    document.getElementById("form").innerHTML = `<table><thead>
+    <tr><strong>Selection's Info</strong></tr>
+    <tr>
+      <th>I.D. #</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Gender</th>
+      <th>D.O.B.</th>
+      <th>Height</th>
+      <th>Weight</th>
+      <th>Eye Color</th>
+      <th>Occupation</th>
+      <th>Parents</th>
+      <th>Current Spouse</th>
+    </tr>
+  </thead><tr>
+    <td>${selectionInfo[0].id}</td>
+    <td>${selectionInfo[0].firstName}</td>
+    <td>${selectionInfo[0].lastName}</td>
+    <td>${selectionInfo[0].gender}</td>
+    <td>${selectionInfo[0].dob}</td>
+    <td>${selectionInfo[0].height}</td>
+    <td>${selectionInfo[0].weight}</td>
+    <td>${selectionInfo[0].eyeColor}</td>
+    <td>${selectionInfo[0].occupation}</td>
+    <td>${selectionInfo[0].parents}</td>
+    <td>${selectionInfo[0].currentSpouse}</td></tr></table>`;
+    let filteredPeople = people.filter(function (person){
+        if(person.parents == idNumber){
+            return true;
+        }
+        return false;
+    });
+    if(filteredPeople.length > 0){
+        console.log(filteredPeople);
+        displayDescendantTable(filteredPeople);
+    }else{
+        console.log('Sorry, looks like there are no descendants.');
+        alert('Sorry, looks like there are no descendants.')
+    }
+}
+
+function displayDescendantTable(object){
+    document.getElementById("data").innerHTML = `<tr><strong>Descendant Info</strong></tr>`;
+    object.map(function(el){
+        document.getElementById("data").innerHTML += `<tr>
+        <td>${el.id}</td>
+        <td>${el.firstName}</td>
+        <td>${el.lastName}</td>
+        <td>${el.gender}</td>
+        <td>${el.dob}</td>
+        <td>${el.height}</td>
+        <td>${el.weight}</td>
+        <td>${el.eyeColor}</td>
+        <td>${el.occupation}</td>
+        <td>${el.parents}</td>
+        <td>${el.currentSpouse}</td>`
+})
+}
 
 //turn data sheet into table//
 
 function displayTable(array){
     array.map(function(el){
         document.getElementById("data").innerHTML += `<tr>
-        <td>${el.id}</td>
+        <td><input type="button" id="button" onclick="displayDescendantInfo(${el.id})" value="${el.id}"></td>
         <td>${el.firstName}</td>
         <td>${el.lastName}</td>
         <td>${el.gender}</td>
@@ -241,10 +302,31 @@ function displayUpdatedTable(array){
 })
 }
 
+// single select
+function searchBySingle(){           //function is called when form is submitted. Searches for matches, makes new array, posts results in table.
+    var userSelection = document.forms['singleForm']['selection'].value;
+    let userInput = document.forms['singleForm']['prop-value'].value;
+
+    let filteredPeople = people.filter(function (person) {
+        if(person[userSelection] == userInput){
+            return true;
+        }
+        return false;
+    });
+    
+    if(filteredPeople.length > 0){
+        console.log(filteredPeople);
+        displayUpdatedTable(filteredPeople);
+    }else{
+        console.log('Sorry, no match.');
+        alert('Sorry, no match.');
+    }
+}
+
 function masterSearch(){
     let masterSearchFilteredPeople = people;
     if (document.forms["nameForm"]["fname"].value != ""){
-        masterSearchFilteredPeople = searchByFirstName();
+        masterSearchFilteredPeople = searchByFirstName(masterSearchFilteredPeople);
     }
     if (document.forms["nameForm"]["lname"].value != ""){
         masterSearchFilteredPeople = searchByLastName(masterSearchFilteredPeople);
@@ -254,7 +336,7 @@ function masterSearch(){
     }
     if (document.forms["nameForm"]["dob"].value != ""){
         masterSearchFilteredPeople = searchByDob(masterSearchFilteredPeople);
-    }
+    } 
     if (document.forms["nameForm"]["height"].value != ""){
         masterSearchFilteredPeople = searchByHeight(masterSearchFilteredPeople);
     }
@@ -278,4 +360,3 @@ function masterSearch(){
 }
 
 displayTable(people);
-
