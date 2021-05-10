@@ -61,6 +61,7 @@ function displayDescendantInfo(idNumber){
         if(person.parents == idNumber){
             return true;
         }
+        document.getElementById("data").innerHTML = "";
         return false;
     });
     if(filteredPeople.length > 0){
@@ -113,7 +114,7 @@ function displayUpdatedTable(object){
     document.getElementById("data").innerHTML = ``;
     object.map(function(el){
         document.getElementById("data").innerHTML += `<tr>
-        <td>${el.id}</td>
+        <td><input type="button" id="button" onclick="displayDescendantInfo(${el.id})" value="${el.id}"></td>
         <td>${el.firstName}</td>
         <td>${el.lastName}</td>
         <td>${el.gender}</td>
@@ -128,8 +129,8 @@ function displayUpdatedTable(object){
 }
 
 function searchBySingle(){           //function is called when form is submitted. Searches for matches, makes new array, posts results in table.
-    var userSelection = document.forms['singleForm']['selection'].value;
-    let userInput = document.forms['singleForm']['prop-value'].value;
+    var userSelection = document.forms['form']['selection'].value;
+    let userInput = document.forms['form']['prop-value'].value;
 
     let filteredPeople = people.filter(function (person) {
         if(person[userSelection] == userInput){
