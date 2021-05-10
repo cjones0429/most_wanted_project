@@ -204,8 +204,11 @@ function displayDescendantInfo(idNumber){
         if(person.id == idNumber){
             return true;
         }
+        else{
+            return false;
+        }
     })
-    document.getElementById("form").innerHTML = `<table><thead>
+    document.getElementById("nameForm").innerHTML = `<table><thead>
     <tr><strong>Selection's Info</strong></tr>
     <tr>
       <th>I.D. #</th>
@@ -233,19 +236,34 @@ function displayDescendantInfo(idNumber){
     <td>${selectionInfo[0].parents}</td>
     <td>${selectionInfo[0].currentSpouse}</td></tr></table>`;
     let filteredPeople = people.filter(function (person){
-        if(person.parents == idNumber){
-            return true;
+        for(let i = 0; i < person.parents.length; i++){
+            if(person.parents[i] == idNumber){
+                return true;
+            }
         }
-        document.getElementById("data").innerHTML = "";
-        return false;
-    });
+    })
     if(filteredPeople.length > 0){
         console.log(filteredPeople);
+        document.getElementById("data").innerHTML = "";
         displayDescendantTable(filteredPeople);
     }else{
+        document.getElementById("data").innerHTML = "";
         console.log('Sorry, looks like there are no descendants.');
         alert('Sorry, looks like there are no descendants.')
     }
+}
+let descends = [];
+function findDescendants(current, peopleList){
+    let kids = peopleList.filter(function (person){
+        if(person.parents == current.id){
+            let newSearch = person;
+            let newResult
+            return true;
+        }
+        return false;
+    })
+    findDescendants(kids, people)
+    return kids;
 }
 
 function displayDescendantTable(object){
