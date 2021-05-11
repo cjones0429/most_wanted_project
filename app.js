@@ -281,7 +281,7 @@ function displayDescendantTable(object){
   </thead>`;
     object.map(function(el){
         document.getElementById("data").innerHTML += `<tr>
-        <td>${el.id}</td>
+        <td><input type="button" id="button" onclick="displayDescendantInfo(${el.id})" value="${el.id}"></td>
         <td>${el.firstName}</td>
         <td>${el.lastName}</td>
         <td>${el.gender}</td>
@@ -445,7 +445,7 @@ function immediateFamily(id, selectedPerson){
         kids.map(function(el){
             document.getElementById("data").innerHTML += `
             <tr>
-            <td>${el.id}</td>
+            <td><input type="button" id="button" onclick="displayDescendantInfo(${el.id})" value="${el.id}"></td>
             <td>${el.firstName}</td>
             <td>${el.lastName}</td>
             <td>${el.gender}</td>
@@ -486,7 +486,7 @@ function immediateFamily(id, selectedPerson){
         siblings.map(function(el){
             document.getElementById("data").innerHTML += `
             <tr>
-            <td>${el.id}</td>
+            <td><input type="button" id="button" onclick="displayDescendantInfo(${el.id})" value="${el.id}"></td>
             <td>${el.firstName}</td>
             <td>${el.lastName}</td>
             <td>${el.gender}</td>
@@ -525,7 +525,7 @@ function immediateFamily(id, selectedPerson){
         parents.map(function(el){
             document.getElementById("data").innerHTML += `
             <tr>
-            <td>${el.id}</td>
+            <td><input type="button" id="button" onclick="displayDescendantInfo(${el.id})" value="${el.id}"></td>
             <td>${el.firstName}</td>
             <td>${el.lastName}</td>
             <td>${el.gender}</td>
@@ -564,7 +564,7 @@ function immediateFamily(id, selectedPerson){
         spouse.map(function(el){
             document.getElementById("data").innerHTML += `
             <tr>
-            <td>${el.id}</td>
+            <td><input type="button" id="button" onclick="displayDescendantInfo(${el.id})" value="${el.id}"></td>
             <td>${el.firstName}</td>
             <td>${el.lastName}</td>
             <td>${el.gender}</td>
