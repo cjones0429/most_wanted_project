@@ -55,7 +55,6 @@ function searchByGender(peoplelist) {
         return filteredPeople;
     }
     else{
-        // return false;
     }
 }
 
@@ -75,7 +74,6 @@ function searchByDob(peoplelist){
         return filteredPeople;
     }
     else{
-        // return false;
     }
 }
    
@@ -95,7 +93,6 @@ function searchByHeight(peoplelist){
         return filteredPeople;
     }
     else{
-        // return false;
     }
 }
 
@@ -115,7 +112,6 @@ function searchByWeight(peoplelist){
         return filteredPeople;
     }
     else{
-        // return false;
     }
 }
 
@@ -135,7 +131,6 @@ function searchByEyeColor(peoplelist){
         return filteredPeople;
     }
     else{
-        // return false;
     }
 }
 
@@ -155,7 +150,6 @@ function searchByOccupation(peoplelist){
         return filteredPeople;
     }
     else{
-        // return false;
     }
 }
 
@@ -248,6 +242,7 @@ function displayDescendantInfo(idNumber){
         console.log('Sorry, looks like there are no descendants.');
         alert('Sorry, looks like there are no descendants.')
     }
+    immediateFamily(idNumber, selectionInfo[0]);
 }
 
 function findDescendants(isParent, peopleList, arrayToPush){
@@ -263,10 +258,24 @@ function findDescendants(isParent, peopleList, arrayToPush){
 }
 
 function displayDescendantTable(object){
-    document.getElementById("data").innerHTML = `<tr><strong>Descendant Info</strong></tr>`;
+    document.getElementById("data").innerHTML = `<tr><strong>Descendant Info</strong></tr><thead>
+    <tr>
+      <th scope="col">I.D.</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Gender</th>
+      <th scope="col">D.O.B</th>
+      <th scope="col">Height</th>
+      <th scope="col">Weight</th>
+      <th scope="col">Eye Color</th>
+      <th scope="col">Occupation</th>
+      <th scope="col">Parents</th>
+      <th scope="col">Current Spouse</th>
+    </tr>
+  </thead>`;
     object.map(function(el){
         document.getElementById("data").innerHTML += `<tr>
-        <td>${el.id}</td>
+        <td><input type="button" id="button" onclick="displayDescendantInfo(${el.id})" value="${el.id}"></td>
         <td>${el.firstName}</td>
         <td>${el.lastName}</td>
         <td>${el.gender}</td>
@@ -283,6 +292,21 @@ function displayDescendantTable(object){
 //turn data sheet into table//
 
 function displayTable(array){
+    document.getElementById("data").innerHTML = `<thead>
+    <tr>
+      <th scope="col">I.D.</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Gender</th>
+      <th scope="col">D.O.B</th>
+      <th scope="col">Height</th>
+      <th scope="col">Weight</th>
+      <th scope="col">Eye Color</th>
+      <th scope="col">Occupation</th>
+      <th scope="col">Parents</th>
+      <th scope="col">Current Spouse</th>
+    </tr>
+  </thead>`;
     array.map(function(el){
         document.getElementById("data").innerHTML += `<tr>
         <td><input type="button" id="button" onclick="displayDescendantInfo(${el.id})" value="${el.id}"></td>
@@ -300,7 +324,21 @@ function displayTable(array){
 }
 
 function displayUpdatedTable(array){
-    document.getElementById("data").innerHTML = ``;
+    document.getElementById("data").innerHTML = `<thead>
+    <tr>
+      <th scope="col">I.D.</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Gender</th>
+      <th scope="col">D.O.B</th>
+      <th scope="col">Height</th>
+      <th scope="col">Weight</th>
+      <th scope="col">Eye Color</th>
+      <th scope="col">Occupation</th>
+      <th scope="col">Parents</th>
+      <th scope="col">Current Spouse</th>
+    </tr>
+  </thead>`;
     array.map(function(el){
         document.getElementById("data").innerHTML += `<tr>
         <td><input type="button" id="button" onclick="displayDescendantInfo(${el.id})" value="${el.id}"></td>
@@ -372,6 +410,168 @@ function masterSearch(){
     }
         console.log(masterSearchFilteredPeople);
     displayUpdatedTable(masterSearchFilteredPeople);
+}
+
+function immediateFamily(id, selectedPerson){
+    let kids = people.filter(function (person){
+            if(person.parents[0] == id || person.parents[1] == id){
+                return true;
+            }
+            return false;
+    })
+    if(kids.length > 0){
+        document.getElementById("data").innerHTML += `<tr><table><thead>
+        <tr><strong>Children</strong></tr>            
+       <tr>
+        <th>I.D. #</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Gender</th>
+        <th>D.O.B.</th>
+        <th>Height</th>
+        <th>Weight</th>
+        <th>Eye Color</th>
+        <th>Occupation</th>
+        <th>Parents</th>
+        <th>Current Spouse</th>
+      </tr>
+    </thead>`
+        kids.map(function(el){
+            document.getElementById("data").innerHTML += `
+            <tr>
+            <td><input type="button" id="button" onclick="displayDescendantInfo(${el.id})" value="${el.id}"></td>
+            <td>${el.firstName}</td>
+            <td>${el.lastName}</td>
+            <td>${el.gender}</td>
+            <td>${el.dob}</td>
+            <td>${el.height}</td>
+            <td>${el.weight}</td>
+            <td>${el.eyeColor}</td>
+            <td>${el.occupation}</td>
+            <td>${el.parents}</td>
+            <td>${el.currentSpouse}</td></tr>`;
+        })
+        document.getElementById("data").innerHTML += `</table></tr><br>`;
+    }
+    let siblings = people.filter(function (person){
+        for(const i = 0; i < person.parents.length; i++){
+            if(person.parents[i] == selectedPerson.parents[0] || person.parents[i] == selectedPerson.parents[1]){
+                return true;
+            }
+            return false;
+        }
+    })
+    if(siblings.length > 0){
+        document.getElementById("data").innerHTML += `<tr><table><thead>
+        <tr><strong>Siblings</strong></tr><tr>
+        <th>I.D. #</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Gender</th>
+        <th>D.O.B.</th>
+        <th>Height</th>
+        <th>Weight</th>
+        <th>Eye Color</th>
+        <th>Occupation</th>
+        <th>Parents</th>
+        <th>Current Spouse</th>
+      </tr>
+    </thead>`
+        siblings.map(function(el){
+            document.getElementById("data").innerHTML += `
+            <tr>
+            <td><input type="button" id="button" onclick="displayDescendantInfo(${el.id})" value="${el.id}"></td>
+            <td>${el.firstName}</td>
+            <td>${el.lastName}</td>
+            <td>${el.gender}</td>
+            <td>${el.dob}</td>
+            <td>${el.height}</td>
+            <td>${el.weight}</td>
+            <td>${el.eyeColor}</td>
+            <td>${el.occupation}</td>
+            <td>${el.parents}</td>
+            <td>${el.currentSpouse}</td></tr>`;
+        })
+        document.getElementById("data").innerHTML += `</table></tr><br>`;
+    }
+    let parents = people.filter(function (person){
+            if(person.id == selectedPerson.parents[0] || person.id == selectedPerson.parents[1]){
+                return true;
+            }
+            return false;
+    })
+    if(parents.length > 0){
+        document.getElementById("data").innerHTML +=`<tr><table><thead>
+        <tr><strong>Parents</strong></tr><tr>
+        <th>I.D. #</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Gender</th>
+        <th>D.O.B.</th>
+        <th>Height</th>
+        <th>Weight</th>
+        <th>Eye Color</th>
+        <th>Occupation</th>
+        <th>Parents</th>
+        <th>Current Spouse</th>
+      </tr>
+    </thead>`
+        parents.map(function(el){
+            document.getElementById("data").innerHTML += `
+            <tr>
+            <td><input type="button" id="button" onclick="displayDescendantInfo(${el.id})" value="${el.id}"></td>
+            <td>${el.firstName}</td>
+            <td>${el.lastName}</td>
+            <td>${el.gender}</td>
+            <td>${el.dob}</td>
+            <td>${el.height}</td>
+            <td>${el.weight}</td>
+            <td>${el.eyeColor}</td>
+            <td>${el.occupation}</td>
+            <td>${el.parents}</td>
+            <td>${el.currentSpouse}</td></tr>`;
+        })
+        document.getElementById("data").innerHTML += `</table></tr><br>`;
+    }
+    let spouse = people.filter(function (person){
+        if(person.id == selectedPerson.currentSpouse || person.id == selectedPerson.currentSpouse){
+            return true;
+        }
+        return false;
+    })
+    if(spouse.length > 0){
+       document.getElementById("data").innerHTML +=`<tr><table><thead>
+        <tr><strong>Spouse</strong></tr><tr>
+        <th>I.D. #</th>
+       <th>First Name</th>
+        <th>Last Name</th>
+        <th>Gender</th>
+        <th>D.O.B.</th>
+        <th>Height</th>
+        <th>Weight</th>
+       <th>Eye Color</th>
+        <th>Occupation</th>
+        <th>Parents</th>
+        <th>Current Spouse</th>
+      </tr>
+    </thead>`
+        spouse.map(function(el){
+            document.getElementById("data").innerHTML += `
+            <tr>
+            <td><input type="button" id="button" onclick="displayDescendantInfo(${el.id})" value="${el.id}"></td>
+            <td>${el.firstName}</td>
+            <td>${el.lastName}</td>
+            <td>${el.gender}</td>
+            <td>${el.dob}</td>
+            <td>${el.height}</td>
+            <td>${el.weight}</td>
+            <td>${el.eyeColor}</td>
+            <td>${el.occupation}</td>
+            <td>${el.parents}</td>
+            <td>${el.currentSpouse}</td></tr>`;
+        })
+        document.getElementById("data").innerHTML += `</table></tr><br>`;
+    }
 }
 
 displayTable(people);
