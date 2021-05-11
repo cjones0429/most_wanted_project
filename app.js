@@ -539,6 +539,45 @@ function immediateFamily(id, selectedPerson){
         })
         document.getElementById("data").innerHTML += `</table></tr><br>`;
     }
+    let spouse = people.filter(function (person){
+        if(person.id == selectedPerson.currentSpouse || person.id == selectedPerson.currentSpouse){
+            return true;
+        }
+        return false;
+    })
+    if(spouse.length > 0){
+       document.getElementById("data").innerHTML +=`<tr><table><thead>
+        <tr><strong>Spouse</strong></tr><tr>
+        <th>I.D. #</th>
+       <th>First Name</th>
+        <th>Last Name</th>
+        <th>Gender</th>
+        <th>D.O.B.</th>
+        <th>Height</th>
+        <th>Weight</th>
+       <th>Eye Color</th>
+        <th>Occupation</th>
+        <th>Parents</th>
+        <th>Current Spouse</th>
+      </tr>
+    </thead>`
+        spouse.map(function(el){
+            document.getElementById("data").innerHTML += `
+            <tr>
+            <td>${el.id}</td>
+            <td>${el.firstName}</td>
+            <td>${el.lastName}</td>
+            <td>${el.gender}</td>
+            <td>${el.dob}</td>
+            <td>${el.height}</td>
+            <td>${el.weight}</td>
+            <td>${el.eyeColor}</td>
+            <td>${el.occupation}</td>
+            <td>${el.parents}</td>
+            <td>${el.currentSpouse}</td></tr>`;
+        })
+        document.getElementById("data").innerHTML += `</table></tr><br>`;
+    }
 }
 
 displayTable(people);
