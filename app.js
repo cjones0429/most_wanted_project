@@ -205,7 +205,7 @@ function displayDescendantInfo(idNumber){
             return true;
         }
     })
-    document.getElementById("form").innerHTML = `<table><thead>
+    document.getElementById("nameForm").innerHTML = `<table><thead>
     <tr><strong>Selection's Info</strong></tr>
     <tr>
       <th>I.D. #</th>
