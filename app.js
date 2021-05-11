@@ -374,4 +374,29 @@ function masterSearch(){
     displayUpdatedTable(masterSearchFilteredPeople);
 }
 
+function immediateFamily(personObject){
+    let family = {};
+    let kids = people.filter(function (person){
+            if(person.parents[0] == personObject.id || person.parents[1] == personObject.id){
+                return true;
+            }
+            return false;
+    })
+    let siblings = people.filter(function (person){
+        for(const i = 0; i < person.parents.length; i++){
+            if(person.parents[i] == personObject.parents[0] || person.parents[i] == personObject.parents[1]){
+                return true;
+            }
+            return false;
+        }
+    })
+    let parents = people.filter(function (person){
+            if(person.id == personObject.parents[0] || person.id == personObject.parents[1]){
+                return true;
+            }
+            return false;
+    })
+    console.log(kids, siblings, parents);
+}
+
 displayTable(people);
