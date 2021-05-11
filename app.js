@@ -264,7 +264,21 @@ function findDescendants(isParent, peopleList, arrayToPush){
 }
 
 function displayDescendantTable(object){
-    document.getElementById("data").innerHTML = `<tr><strong>Descendant Info</strong></tr>`;
+    document.getElementById("data").innerHTML = `<tr><strong>Descendant Info</strong></tr><thead>
+    <tr>
+      <th scope="col">I.D.</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Gender</th>
+      <th scope="col">D.O.B</th>
+      <th scope="col">Height</th>
+      <th scope="col">Weight</th>
+      <th scope="col">Eye Color</th>
+      <th scope="col">Occupation</th>
+      <th scope="col">Parents</th>
+      <th scope="col">Current Spouse</th>
+    </tr>
+  </thead>`;
     object.map(function(el){
         document.getElementById("data").innerHTML += `<tr>
         <td>${el.id}</td>
@@ -284,6 +298,21 @@ function displayDescendantTable(object){
 //turn data sheet into table//
 
 function displayTable(array){
+    document.getElementById("data").innerHTML = `<thead>
+    <tr>
+      <th scope="col">I.D.</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Gender</th>
+      <th scope="col">D.O.B</th>
+      <th scope="col">Height</th>
+      <th scope="col">Weight</th>
+      <th scope="col">Eye Color</th>
+      <th scope="col">Occupation</th>
+      <th scope="col">Parents</th>
+      <th scope="col">Current Spouse</th>
+    </tr>
+  </thead>`;
     array.map(function(el){
         document.getElementById("data").innerHTML += `<tr>
         <td><input type="button" id="button" onclick="displayDescendantInfo(${el.id})" value="${el.id}"></td>
@@ -301,7 +330,21 @@ function displayTable(array){
 }
 
 function displayUpdatedTable(array){
-    document.getElementById("data").innerHTML = ``;
+    document.getElementById("data").innerHTML = `<thead>
+    <tr>
+      <th scope="col">I.D.</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Gender</th>
+      <th scope="col">D.O.B</th>
+      <th scope="col">Height</th>
+      <th scope="col">Weight</th>
+      <th scope="col">Eye Color</th>
+      <th scope="col">Occupation</th>
+      <th scope="col">Parents</th>
+      <th scope="col">Current Spouse</th>
+    </tr>
+  </thead>`;
     array.map(function(el){
         document.getElementById("data").innerHTML += `<tr>
         <td><input type="button" id="button" onclick="displayDescendantInfo(${el.id})" value="${el.id}"></td>
