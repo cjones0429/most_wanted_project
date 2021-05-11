@@ -248,6 +248,7 @@ function displayDescendantInfo(idNumber){
         console.log('Sorry, looks like there are no descendants.');
         alert('Sorry, looks like there are no descendants.')
     }
+    immediateFamily(idNumber, selectionInfo[0]);
 }
 
 function findDescendants(isParent, peopleList, arrayToPush){
@@ -374,29 +375,127 @@ function masterSearch(){
     displayUpdatedTable(masterSearchFilteredPeople);
 }
 
-function immediateFamily(personObject){
-    let family = {};
+function immediateFamily(id, selectedPerson){
     let kids = people.filter(function (person){
-            if(person.parents[0] == personObject.id || person.parents[1] == personObject.id){
+            if(person.parents[0] == id || person.parents[1] == id){
                 return true;
             }
             return false;
     })
+    if(kids.length > 0){
+        document.getElementById("data").innerHTML += `<tr><table><thead>
+        <tr><strong>Children</strong></tr>            
+       <tr>
+        <th>I.D. #</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Gender</th>
+        <th>D.O.B.</th>
+        <th>Height</th>
+        <th>Weight</th>
+        <th>Eye Color</th>
+        <th>Occupation</th>
+        <th>Parents</th>
+        <th>Current Spouse</th>
+      </tr>
+    </thead>`
+        kids.map(function(el){
+            document.getElementById("data").innerHTML += `
+            <tr>
+            <td>${el.id}</td>
+            <td>${el.firstName}</td>
+            <td>${el.lastName}</td>
+            <td>${el.gender}</td>
+            <td>${el.dob}</td>
+            <td>${el.height}</td>
+            <td>${el.weight}</td>
+            <td>${el.eyeColor}</td>
+            <td>${el.occupation}</td>
+            <td>${el.parents}</td>
+            <td>${el.currentSpouse}</td></tr>`;
+        })
+        document.getElementById("data").innerHTML += `</table></tr><br>`;
+    }
     let siblings = people.filter(function (person){
         for(const i = 0; i < person.parents.length; i++){
-            if(person.parents[i] == personObject.parents[0] || person.parents[i] == personObject.parents[1]){
+            if(person.parents[i] == selectedPerson.parents[0] || person.parents[i] == selectedPerson.parents[1]){
                 return true;
             }
             return false;
         }
     })
+    if(siblings.length > 0){
+        document.getElementById("data").innerHTML += `<tr><table><thead>
+        <tr><strong>Siblings</strong></tr><tr>
+        <th>I.D. #</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Gender</th>
+        <th>D.O.B.</th>
+        <th>Height</th>
+        <th>Weight</th>
+        <th>Eye Color</th>
+        <th>Occupation</th>
+        <th>Parents</th>
+        <th>Current Spouse</th>
+      </tr>
+    </thead>`
+        siblings.map(function(el){
+            document.getElementById("data").innerHTML += `
+            <tr>
+            <td>${el.id}</td>
+            <td>${el.firstName}</td>
+            <td>${el.lastName}</td>
+            <td>${el.gender}</td>
+            <td>${el.dob}</td>
+            <td>${el.height}</td>
+            <td>${el.weight}</td>
+            <td>${el.eyeColor}</td>
+            <td>${el.occupation}</td>
+            <td>${el.parents}</td>
+            <td>${el.currentSpouse}</td></tr>`;
+        })
+        document.getElementById("data").innerHTML += `</table></tr><br>`;
+    }
     let parents = people.filter(function (person){
-            if(person.id == personObject.parents[0] || person.id == personObject.parents[1]){
+            if(person.id == selectedPerson.parents[0] || person.id == selectedPerson.parents[1]){
                 return true;
             }
             return false;
     })
-    console.log(kids, siblings, parents);
+    if(parents.length > 0){
+        document.getElementById("data").innerHTML +=`<tr><table><thead>
+        <tr><strong>Parents</strong></tr><tr>
+        <th>I.D. #</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Gender</th>
+        <th>D.O.B.</th>
+        <th>Height</th>
+        <th>Weight</th>
+        <th>Eye Color</th>
+        <th>Occupation</th>
+        <th>Parents</th>
+        <th>Current Spouse</th>
+      </tr>
+    </thead>`
+        parents.map(function(el){
+            document.getElementById("data").innerHTML += `
+            <tr>
+            <td>${el.id}</td>
+            <td>${el.firstName}</td>
+            <td>${el.lastName}</td>
+            <td>${el.gender}</td>
+            <td>${el.dob}</td>
+            <td>${el.height}</td>
+            <td>${el.weight}</td>
+            <td>${el.eyeColor}</td>
+            <td>${el.occupation}</td>
+            <td>${el.parents}</td>
+            <td>${el.currentSpouse}</td></tr>`;
+        })
+        document.getElementById("data").innerHTML += `</table></tr><br>`;
+    }
 }
 
 displayTable(people);
