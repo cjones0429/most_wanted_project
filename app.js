@@ -351,7 +351,7 @@ function displayUpdatedTable(array){
         <td>${el.eyeColor}</td>
         <td>${el.occupation}</td>
         <td>${el.parents}</td>
-        <td>${el.currentSpouse}</td>`
+        <td>${el.currentSpouse}</td></tr>`
 })
 }
 
@@ -413,7 +413,7 @@ function masterSearch(){
         alert(`Sorry, no matches.`)
     }
     else{
-    displayUpdatedTable(masterSearchFilteredPeople);
+    displayTable(masterSearchFilteredPeople);
     }
 }
 
