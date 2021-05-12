@@ -1,7 +1,7 @@
 "use strict"
 
 
-function searchByFirstName(peoplelist = []){
+function searchByFirstName(peoplelist){
     let firstNameInput = document.forms['nameForm']['fname'].value;
     let list = peoplelist;
     let filteredPeople = list.filter(function (person) {
@@ -20,7 +20,7 @@ function searchByFirstName(peoplelist = []){
     }
 }
 
-function searchByLastName(peoplelist = []){
+function searchByLastName(peoplelist){
     let lastNameInput = document.forms['nameForm']['lname'].value;
     let list = peoplelist;
     let filteredPeople = list.filter(function (person) {
@@ -39,7 +39,7 @@ function searchByLastName(peoplelist = []){
     }
 }
 
-function searchByGender(peoplelist = []) {
+function searchByGender(peoplelist) {
     let genderInput = document.forms['nameForm']['gender'].value;
     let list = peoplelist;
     let filteredPeople = list.filter(function (person) {
@@ -58,7 +58,7 @@ function searchByGender(peoplelist = []) {
     }
 }
 
-function searchByDob(peoplelist = []){
+function searchByDob(peoplelist){
     let dobInput = document.forms['nameForm']['dob'].value;
     let list = peoplelist;
     let filteredPeople = list.filter(function (person) {
@@ -77,7 +77,7 @@ function searchByDob(peoplelist = []){
     }
 }
    
-function searchByHeight(peoplelist = []){
+function searchByHeight(peoplelist){
     let heightInput = document.forms['nameForm']['height'].value;
     let list = peoplelist;
     let filteredPeople = list.filter(function (person) {
@@ -96,7 +96,7 @@ function searchByHeight(peoplelist = []){
     }
 }
 
-function searchByWeight(peoplelist = []){
+function searchByWeight(peoplelist){
     let weightInput = document.forms['nameForm']['weight'].value;
     let list = peoplelist;
     let filteredPeople = list.filter(function (person) {
@@ -115,7 +115,7 @@ function searchByWeight(peoplelist = []){
     }
 }
 
-function searchByEyeColor(peoplelist = []){
+function searchByEyeColor(peoplelist){
     let eyeColorInput = document.forms['nameForm']['eyeColor'].value;
     let list = peoplelist;
     let filteredPeople = list.filter(function (person) {
@@ -134,7 +134,7 @@ function searchByEyeColor(peoplelist = []){
     }
 }
 
-function searchByOccupation(peoplelist = []){
+function searchByOccupation(peoplelist){
     let occupationInput = document.forms['nameForm']['occupation'].value;
     let list = peoplelist;
     let filteredPeople = list.filter(function (person) {
@@ -153,7 +153,7 @@ function searchByOccupation(peoplelist = []){
     }
 }
 
-function searchByParents(peoplelist = []){
+function searchByParents(peoplelist){
     let parentsInput = document.forms['nameForm']['parents'].value;
     let list = peoplelist;
     let filteredPeople = list.filter(function (person) {
@@ -172,7 +172,7 @@ function searchByParents(peoplelist = []){
     }
 }
 
-function searchByCurrentSpouse(peoplelist = []){
+function searchByCurrentSpouse(peoplelist){
     let currentSpouseInput = document.forms['nameForm']['currentSpouse'].value;
     let list = peoplelist;
     let filteredPeople = list.filter(function (person) {
@@ -260,7 +260,7 @@ function findDescendants(isParent, peopleList, arrayToPush){
 function displayDescendantTable(object){
     document.getElementById("data").innerHTML = `<tr><strong>Descendant Info</strong></tr><thead>
     <tr>
-      <th scope="col">I.D.</th>
+      <th scope="col">I.D. #</th>
       <th scope="col">First Name</th>
       <th scope="col">Last Name</th>
       <th scope="col">Gender</th>
@@ -409,12 +409,16 @@ function masterSearch(){
         masterSearchFilteredPeople = searchByCurrentSpouse(masterSearchFilteredPeople);
     }
         console.log(masterSearchFilteredPeople);
+<<<<<<< HEAD
     if(masterSearchFilteredPeople == undefined){
         alert(`Sorry, no matches.`)
     }
     else{
     displayTable(masterSearchFilteredPeople);
     }
+=======
+    displayUpdatedTable(masterSearchFilteredPeople);
+>>>>>>> 652efd1c31b49ef109fadedf275d3810a556c412
 }
 
 function immediateFamily(id, selectedPerson){
