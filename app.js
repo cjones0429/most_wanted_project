@@ -260,7 +260,7 @@ function findDescendants(isParent, peopleList, arrayToPush){
 function displayDescendantTable(object){
     document.getElementById("data").innerHTML = `<tr><strong>Descendant Info</strong></tr><thead>
     <tr>
-      <th scope="col">I.D.</th>
+      <th scope="col">I.D. #</th>
       <th scope="col">First Name</th>
       <th scope="col">Last Name</th>
       <th scope="col">Gender</th>
